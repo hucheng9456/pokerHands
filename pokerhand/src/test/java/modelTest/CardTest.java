@@ -37,9 +37,9 @@ public class CardTest {
 	
 	@Test
 	public void testToString() {
-        assertEquals("3 of diamonds", new Card((short)2,(short)2).toString());
-        assertEquals("3 of clubs", new Card((short)3,(short)2).toString());
-        assertEquals("2 of diamonds", new Card((short)2,(short)1).toString());
+        assertEquals("4 of diamonds", new Card((short)2,(short)2).toString());
+        assertEquals("4 of clubs", new Card((short)3,(short)2).toString());
+        assertEquals("3 of diamonds", new Card((short)2,(short)1).toString());
     }
 	
     @Test
@@ -52,10 +52,10 @@ public class CardTest {
     
     @Test
     public void testGetRank() {
-        assertEquals("Ace", new Card((short)2,(short)0).getRank());
-        assertEquals("King", new Card((short)2,(short)12).getRank());
-        assertEquals("3", new Card((short)2,(short)2).getRank());
-        assertNotEquals("2", new Card((short)1,(short)2).getRank());
+        assertEquals("Ace", new Card((short)2,(short)12).getRank());
+        assertEquals("King", new Card((short)2,(short)11).getRank());
+        assertEquals("4", new Card((short)2,(short)2).getRank());
+        assertNotEquals("1", new Card((short)1,(short)2).getRank());
     }
 	
 	@Test

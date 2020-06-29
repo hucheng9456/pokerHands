@@ -57,7 +57,7 @@ public class Card{
     }
 
     private static boolean isValidSuit(short suit) {
-        return suit == 1 || suit == 2 || suit == 3 || suit == 4;
+        return suit == 0 || suit == 1 || suit == 2 || suit == 3;
     }
 
 }

@@ -6,12 +6,13 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Import;
 
-import configuration.CORSHander;
-import configuration.ResourceServerConfig;
-import configuration.WebMVCConfiger;
+import pokerhand.pokerhand.configuration.CORSHander;
+import pokerhand.pokerhand.configuration.ResourceServerConfig;
+
+
 
 @SpringBootApplication
-@Import({ResourceServerConfig.class,CORSHander.class,WebMVCConfiger.class})
+@Import({ResourceServerConfig.class,CORSHander.class})
 public class PokerhandApplication extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {

@@ -1,11 +1,13 @@
 package modelTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,89 +19,83 @@ import pokerhand.pokerhand.model.Hand;
 
 @SpringBootTest
 public class HandTest {
-
-	@Test
-    public void checkPokerHands() {
-		Card [] cards = new Card[5];
+	
+	private Card [] cards = new Card[5],cards2 = new Card[5],cards3 = new Card[5];
+	private Hand clubFlush,diamondFlush,highCardOnly;
+	
+	@Before
+	public void init() {
 		for(int i=0;i<5;i++) {
 			Card card = new Card((short)2,(short)2);
 			cards[i] = card;
 		}
-    	Hand hand2 = new Hand(cards);
-    	assertEquals(5,hand2.getCards().length);
+		for(int i=0;i<5;i++) {
+			Card card = new Card((short)3,(short)12);
+			cards2[i] = card;
+		}
+    	diamondFlush = new Hand(cards);
+    	clubFlush = new Hand(cards2);
+    	cards3[0] = new Card((short)2,(short)2);
+    	cards3[1] = new Card((short)3,(short)1);
+    	cards3[2] = new Card((short)2,(short)3);
+    	cards3[3] = new Card((short)3,(short)9);
+    	cards3[4] = new Card((short)1,(short)10);
+    	highCardOnly = new Hand(cards3);
+	}
+
+	@Test
+    public void testCardsInHand() {
+    	assertEquals(5,diamondFlush.getCards().length);
+    	assertEquals(5,clubFlush.getCards().length);
+    	assertEquals(5,highCardOnly.getCards().length);
 	}
 	
 	@Test
 	public void testRankHand() {
-		Card [] cards = new Card[5];
-		for(int i=0;i<5;i++) {
-			Card card = new Card((short)2,(short)2);
-			cards[i] = card;
-		}
-    	Hand hand = new Hand(cards);
-//    	assertEquals(4,hand.rankHand());
+    	assertEquals(5,diamondFlush.rankHand()[2]);
+    	assertEquals(5,clubFlush.rankHand()[12]);
+    	assertEquals(1,highCardOnly.rankHand()[2]);
 	}
 	
 	@Test
 	public void testPair() {
-		Card [] cards = new Card[5];
-		for(int i=0;i<5;i++) {
-			Card card = new Card((short)3,(short)3);
-			cards[i] = card;
-		}
 		cards[4] = new Card((short)2,(short)8);
 		cards[3] = new Card((short)3,(short)8);
-    	Hand hand2 = new Hand(cards);
-    	assertTrue(hand2.isOnePair());
-	}
-	
-	@Test
-	public void testRank() {
-		Card [] cards = new Card[5];
-		for(int i=0;i<5;i++) {
-			Card card = new Card((short)3,(short)3);
-			cards[i] = card;
-		}
-		cards[4] = new Card((short)2,(short)8);
-		cards[3] = new Card((short)3,(short)8);
-    	Hand hand2 = new Hand(cards);
-    	hand2.rankHand();
+		clubFlush = new Hand(cards);
+    	assertTrue(clubFlush.isOnePair());
 	}
 	
 	@Test
 	public void testHighCard() {
-		Card [] cards = new Card[5];
-		for(int i=0;i<5;i++) {
-			Card card = new Card((short)3,(short)3);
-			cards[i] = card;
-		}
 		cards[4] = new Card((short)2,(short)8);
 		cards[3] = new Card((short)3,(short)8);
-    	Hand hand2 = new Hand(cards);
-    	assertEquals("10 of clubs", hand2.highCard().toString());
+		clubFlush = new Hand(cards);
+    	assertEquals("10 of clubs", clubFlush.highCard().toString());
 	}
 	
 	@Test
 	public void testThreeOfKind() {
-		Card [] cards = new Card[5];
-		for(int i=0;i<5;i++) {
-			Card card = new Card((short)3,(short)3);
-			cards[i] = card;
-		}
+		cards[1] = new Card((short)3,(short)8);
 		cards[2] = new Card((short)2,(short)8);
 		cards[3] = new Card((short)3,(short)8);
-    	Hand hand2 = new Hand(cards);
-    	assertTrue(hand2.isThreeOfKind());
+		clubFlush = new Hand(cards);
+    	assertTrue(clubFlush.isThreeOfKind());
+    	assertFalse(highCardOnly.isThreeOfKind());
 	}
 	
 	@Test
 	public void testFlush() {
-		Card [] cards = new Card[5];
-		for(int i=0;i<5;i++) {
-			Card card = new Card((short)3,(short)3);
-			cards[i] = card;
-		}
-    	Hand hand2 = new Hand(cards);
-    	assertTrue(hand2.isFlush());
+    	assertTrue(clubFlush.isFlush());
+    	assertFalse(highCardOnly.isFlush());
+	}
+	
+	@Test
+	public void testGetMaxThreeOfKind() {
+		cards[1] = new Card((short)1,(short)8);
+		cards[2] = new Card((short)2,(short)8);
+		cards[3] = new Card((short)3,(short)8);
+		clubFlush = new Hand(cards);
+		assertEquals(3,clubFlush.getMaxThreeOfKind().getSuitShort());
+		assertEquals(8,clubFlush.getMaxThreeOfKind().getRankShort());
 	}
 }

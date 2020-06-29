@@ -35,4 +35,12 @@ public class CardFormatter{
 		Card card = new Card(this.suit,this.rank);
 		return card;
 	}
+	
+	public void setRank(short rank) {
+		this.rank = rank;
+	}
+	
+	public void setSuit(short suit) {
+		this.suit = suit;
+	}
 }

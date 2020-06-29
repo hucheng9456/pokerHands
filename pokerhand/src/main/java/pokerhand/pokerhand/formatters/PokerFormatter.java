@@ -31,4 +31,12 @@ public class PokerFormatter{
 	public List<CardFormatter> getCards() {
 		return this.cards;
 	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public void setCards(List<CardFormatter> cards) {
+		this.cards = cards;
+	}
 }
