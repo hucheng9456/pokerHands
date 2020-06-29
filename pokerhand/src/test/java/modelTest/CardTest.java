@@ -2,6 +2,7 @@ package modelTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
@@ -21,7 +22,8 @@ public class CardTest {
 
 	@Test
     public void addPokerCard() {
-		new Card((short)2,(short)2);
+		Card card = new Card((short)2,(short)2);
+		assertNotNull(card.getRank());
 	}
 	
 	@Test
@@ -58,14 +60,4 @@ public class CardTest {
         assertNotEquals("1", new Card((short)1,(short)2).getRank());
     }
 	
-	@Test
-    public void checkPokerHands() {
-		Card [] cards = new Card[5];
-		for(int i=0;i<5;i++) {
-			Card card = new Card((short)2,(short)2);
-			cards[i] = card;
-		}
-    	Hand hand = new Hand(cards);
-    	hand.displayAll();
-	}
 }

@@ -22,21 +22,24 @@ public class Hand {
 	    this.smallGroupRank= 0;
 	}
 	   
-		
+	//display 5 cards in a hand;
 	public void displayAll()
 	{
 	    for (int x=0; x<5; x++)
 	    System.out.println(cards[x]);
 	}
 	
+	//getter
 	public Card [] getCards() {
 		return cards;
 	}
-		
+	
+	//getter
 	public int [] getValues() {
 		return value;
 	}
-		   
+	
+	//if its a flush hand returns 4, threeOfKind returns 3, onePair returns 2, needs to compare high card returns 1;
 	public int handCategory() {
 		if(isFlush()) {
 			return 4;
@@ -49,6 +52,7 @@ public class Hand {
 		}
 	}
    
+	//getting the high card in a hand
 	public Card highCard() {
 		Card max = cards[0];
 		Short [] ranks = new Short[HANDSIZE];
@@ -64,8 +68,9 @@ public class Hand {
 		}
 		return max;
 	}
-	   
-   public boolean isOnePair() {
+
+	//check if it contains a pair
+	public boolean isOnePair() {
 	   	for(int i=0;i<cards.length;i++) {
 	   		for(int j=i+1;j<cards.length;j++) {
 	   	   		if(cards[j].getRankShort() == cards[i].getRankShort()) {
@@ -74,8 +79,9 @@ public class Hand {
 	   		}
 	   	}
 	   	return false;
-   }
+  	}
 	   
+   //returns the higher card inside of a pair
    public Card getMaxOnePair() {
 	   	for(int i=0;i<cards.length;i++) {
 	   		for(int j=i+1;j<cards.length;j++) {
@@ -91,6 +97,7 @@ public class Hand {
 	   	return null;
    }
    
+   //check if this hand contains flush
    public boolean isFlush() {
        String suit = cards[0].getSuit();
        for (int i = 1; i < 5; i++) {
@@ -99,6 +106,7 @@ public class Hand {
        return true;
    }
    
+   //check if this hand contains ThreeOfKind
    public boolean isThreeOfKind() {
 	   boolean hasThreeOfAKind = false;
        int[] value = new int[cards.length];
@@ -123,6 +131,7 @@ public class Hand {
        return hasThreeOfAKind;
    }
    
+   //getting the maximum card within three of kind
    public Card getMaxThreeOfKind() {
        int[] value = new int[cards.length];
        int[] suit = new int[cards.length];
@@ -152,9 +161,10 @@ public class Hand {
                }
            }
        }
-       return null;
+       return cards[0];
    }
    
+   //rank a hand by cards rank;
    public int [] rankHand() {
 	   for (int x=0; x<=13; x++){
            ranks[x]=0;

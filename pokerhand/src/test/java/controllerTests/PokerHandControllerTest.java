@@ -26,6 +26,7 @@ public class PokerHandControllerTest {
 	private List<CardFormatter> list = new ArrayList<>(),list2 = new ArrayList<>();;
 	
 	@Before
+	//to create JSON input
 	public void init() {
 		pokerFormatter.setName("joe");
 		pokerFormatter2.setName("jen");
@@ -48,7 +49,7 @@ public class PokerHandControllerTest {
 	}
 	
 	@Test
-	public void testThreeOfKind() {
+	public void testPokerHands() {
 		list2.add(cardFormatter);
 		list2.add(cardFormatter2);
 		list2.add(cardFormatter4);
